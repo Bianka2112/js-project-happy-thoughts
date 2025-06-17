@@ -1,9 +1,10 @@
 import { useState } from "react";
 import LoginModal from "./LoginModal";
+import { useAuthStore } from "../store/useAuthStore";
 
 const LoginButton = () => {
   const [open, setOpen] = useState(false)
-  // const login = useAuthStore((state) => state.login)
+  const createUser = useAuthStore((state) => state.createUser)
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -12,9 +13,9 @@ const LoginButton = () => {
 
   return (
     <>
-      <button onClick={handleClick}>Login</button>
+      <button onClick={handleClick}>Register to Edit Your Thoughts</button>
       <LoginModal open={open} onClose={() => setOpen(false)} 
-      // onLogin={login} 
+      onLogin={createUser} 
       />
     </>
   )

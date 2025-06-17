@@ -10,7 +10,7 @@ const modalStyle = {
   bgcolor: 'background.paper',
   borderRadius: 2,
   boxShadow: 24,
-  p: 4,
+  p: 6,
 }
 
 const LoginModal = ({ open, onClose, onLogin }) => {
@@ -25,9 +25,9 @@ const LoginModal = ({ open, onClose, onLogin }) => {
   return (
     <>
    
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} >
     <Box sx={modalStyle}>
-      <Typography variant="h6" mb={2}>Login</Typography>
+      <Typography variant="h6" mb={2}>Register</Typography>
       <TextField
         fullWidth
         label="Username"
@@ -52,7 +52,7 @@ const LoginModal = ({ open, onClose, onLogin }) => {
         onClick={handleSubmit}
         sx={{ mt: 2 }}
       >
-        Submit
+        Let me edit
       </Button>
     </Box>
   </Modal>

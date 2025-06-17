@@ -15,8 +15,7 @@ export const GlobalStyle = createGlobalStyle`
         to bottom, 
         rgba(255, 237, 230, 0.85), 
         rgba(255, 237, 230, 0.3)
-      ),
-    url("pixel-heart.png") no-repeat center center fixed;
+      );
     background-size: cover;
     font-family: 'Quicksand', sans-serif;
     background-color: #fdfdfd;
