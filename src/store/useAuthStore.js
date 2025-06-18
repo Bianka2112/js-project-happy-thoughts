@@ -3,6 +3,7 @@ import { create } from "zustand"
 export const useAuthStore = create((set) => ({
     username: "",
     email: "",
+    userId: localStorage.getItem("userId") ?? null,
     accessToken: localStorage.getItem("accessToken") ?? null,
 
   setUsername: (username) => set({ username }),
@@ -20,8 +21,9 @@ export const useAuthStore = create((set) => ({
         throw new Error(data.message || "Registration failed")
       }
 
-      set({ accessToken: data.accessToken, username: data.username })
+      set({ accessToken: data.accessToken, username: data.username, userId: data.userId })
       localStorage.setItem("accessToken", data.accessToken)
+      localStorage.setItem("userId", data.userId)
 
     } catch (err) {
       console.error("User not registered:", err)
@@ -41,8 +43,9 @@ export const useAuthStore = create((set) => ({
         throw new Error(data.message || "Login failed")
       }
 
-      set({ accessToken: data.accessToken, username: data.username })
+      set({ accessToken: data.accessToken, username: data.username, userId: data.userId })
       localStorage.setItem("accessToken", data.accessToken)
+      localStorage.setItem("userId", data.userId)
 
     } catch (err) {
       console.error("User not logged in:", err)
@@ -53,6 +56,7 @@ export const useAuthStore = create((set) => ({
   logoutUser: async () => {
     set({ accessToken: null, username: "", password: "", email: "" })
     localStorage.removeItem("accessToken")
+    localStorage.removeItem("userId")
   }
 })
 )
