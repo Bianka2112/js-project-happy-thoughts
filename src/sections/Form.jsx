@@ -1,16 +1,20 @@
 import { useState } from "react"
 import { useThoughtStore } from "../store/useThoughtStore"
+import { useAuthStore } from "../store/useAuthStore"
 import { API_URL } from "../utils/constants"
 
 import * as Styled from "../components/Styled-Comps"
-import LoginButton from "../components/LoginButton"
+// import LoginButton from "../components/LoginButton"
+import SignupForm from "../components/SignupForm"
+import LoginForm from "../components/LoginForm"
 
 const Form = () => {
 
   const addThought = useThoughtStore(state => state.addThought)
-   const [MessageText, setMessageText] = useState("")
+  const accessToken = useAuthStore((state) => state.accessToken)
+   const [messageText, setMessageText] = useState("")
    const [error, setError] = useState("")
-   const msgLength = MessageText.length
+   const msgLength = messageText.length
 
    const handleSubmit = async (event) => {
       event.preventDefault()    
@@ -24,17 +28,22 @@ const Form = () => {
       try {
         const response = await fetch(API_URL, {
           method: "POST",
-          body: JSON.stringify({ message: MessageText }),
-          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: messageText }),
+          headers: { 
+            "Content-Type": "application/json",  
+            Authorization: accessToken 
+          },
         })
 
+        const newThought = await response.json()
+
         if (!response.ok) {
-          throw new Error("Failed to post message")
+          throw new Error(newThought.message || "Failed to post message")
         }
 
-        const newThought = await response.json()
           addThought(newThought.response)
           setMessageText("")
+          setError("")
 
       } catch (error) {
         setError(error.message)
@@ -52,7 +61,7 @@ const Form = () => {
               setMessageText(event.target.value)
               setError("")  
             }}
-            value={MessageText}
+            value={messageText}
             placeholder="Hakuna Matata"
             />
           <Styled.CharCount $invalid={msgLength < 5 || msgLength > 140}>
@@ -70,7 +79,8 @@ const Form = () => {
              {error}
             </p>
           )}
-          <LoginButton />
+          <SignupForm />
+          <LoginForm />
       </Styled.FormContainer>
   ) 
 }
