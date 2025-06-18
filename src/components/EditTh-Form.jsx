@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react"
-import { Modal, Box, Typography, TextField, Button, IconButton, Tooltip } from "@mui/material"
+import {
+  Modal,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  IconButton,
+  Tooltip,
+  Snackbar,
+  Alert
+} from "@mui/material"
 import { useThoughtStore } from "../store/useThoughtStore"
 import { useAuthStore } from "../store/useAuthStore"
 
@@ -14,7 +24,7 @@ const modalStyle = {
   bgcolor: "#fff9f7",
   borderRadius: 2,
   boxShadow: 24,
-  p: 6,
+  p: 6
 }
 
 const EditThoughtForm = ({ id, currentMessage }) => {
@@ -24,6 +34,7 @@ const EditThoughtForm = ({ id, currentMessage }) => {
   const [open, setOpen] = useState(false)
   const [newMessage, setNewMessage] = useState(currentMessage)
   const [errorMessage, setErrorMessage] = useState("")
+  const [snackbarOpen, setSnackbarOpen] = useState(false)
 
   useEffect(() => {
     if (open) {
@@ -31,7 +42,7 @@ const EditThoughtForm = ({ id, currentMessage }) => {
     }
   }, [open, currentMessage])
 
-  const handleOpen = () => {
+  const handleClickOpen = () => {
     setOpen(true)
   }
 
@@ -48,18 +59,19 @@ const EditThoughtForm = ({ id, currentMessage }) => {
 
     try {
       await editThought(id, newMessage)
+      setSnackbarOpen(true)
       handleClose()
     } catch (err) {
       setErrorMessage("Update failed. Try again.")
     }
   }
 
-  if (!accessToken) return null // hide edit option if not logged in
+  if (!accessToken) return null
 
   return (
     <>
       <Tooltip title="Edit">
-        <IconButton onClick={handleOpen} aria-label="Edit your message">
+        <IconButton onClick={handleClickOpen} aria-label="Edit your message">
           ✏️
         </IconButton>
       </Tooltip>
@@ -82,20 +94,38 @@ const EditThoughtForm = ({ id, currentMessage }) => {
           )}
           <Box mt={2} display="flex" justifyContent="flex-end" gap={1}>
             <Button onClick={handleClose} variant="outlined">Cancel</Button>
-            <Button onClick={handleSave} variant="contained" sx={{
-              backgroundColor: "#fabda5b3",
-              color: "#111",
-              fontWeight: "600",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "#f95f86"
-              },
-            }}>
+            <Button
+              onClick={handleSave}
+              variant="contained"
+              sx={{
+                backgroundColor: "#fabda5b3",
+                color: "#111",
+                fontWeight: "600",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: "#f95f86"
+                },
+              }}
+            >
               Save
             </Button>
           </Box>
         </Box>
       </Modal>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Thought updated successfully!
+        </Alert>
+      </Snackbar>
     </>
   )
 }
