@@ -4,9 +4,9 @@ import { useAuthStore } from "../store/useAuthStore"
 import { API_URL } from "../utils/constants"
 
 import * as Styled from "../components/Styled-Comps"
-// import LoginButton from "../components/LoginButton"
 import SignupForm from "../components/SignupForm"
 import LoginForm from "../components/LoginForm"
+import WelcomeUser from "../components/WelcomeUser"
 
 const Form = () => {
 
@@ -80,6 +80,7 @@ const Form = () => {
             </p>
           )}
           <SignupForm />
+          <WelcomeUser />
           <LoginForm />
       </Styled.FormContainer>
   ) 

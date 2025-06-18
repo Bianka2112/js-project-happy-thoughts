@@ -20,7 +20,7 @@ export const useAuthStore = create((set) => ({
         throw new Error(data.message || "Registration failed")
       }
 
-      set({ accessToken: data.accessToken })
+      set({ accessToken: data.accessToken, username: data.username })
       localStorage.setItem("accessToken", data.accessToken)
 
     } catch (err) {
@@ -41,7 +41,7 @@ export const useAuthStore = create((set) => ({
         throw new Error(data.message || "Login failed")
       }
 
-      set({ accessToken: data.accessToken })
+      set({ accessToken: data.accessToken, username: data.username })
       localStorage.setItem("accessToken", data.accessToken)
 
     } catch (err) {
