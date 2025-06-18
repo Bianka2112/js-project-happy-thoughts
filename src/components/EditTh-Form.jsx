@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Modal, Box, Typography, TextField, Button } from "@mui/material"
+import { Modal, Box, Typography, TextField, Button, IconButton, Tooltip } from "@mui/material"
 import { useThoughtStore } from "../store/useThoughtStore"
 import { useAuthStore } from "../store/useAuthStore"
 
@@ -31,7 +31,7 @@ const EditThoughtForm = ({ id, currentMessage }) => {
     }
   }, [open, currentMessage])
 
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true)
   }
 
@@ -58,7 +58,11 @@ const EditThoughtForm = ({ id, currentMessage }) => {
 
   return (
     <>
-      <button onClick={handleClickOpen} aria-label="Edit this message">✏️</button>
+      <Tooltip title="Edit">
+        <IconButton onClick={handleOpen} aria-label="Edit your message">
+          ✏️
+        </IconButton>
+      </Tooltip>
       <Modal open={open} onClose={handleClose} aria-labelledby="edit-modal-title">
         <Box sx={modalStyle}>
           <Typography variant="h6" mb={2}>Edit Your Thought</Typography>

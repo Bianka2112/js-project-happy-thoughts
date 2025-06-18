@@ -80,7 +80,6 @@ const Form = () => {
             </p>
           )}
           <SignupForm />
-          <WelcomeUser />
           <LoginForm />
       </Styled.FormContainer>
   ) 

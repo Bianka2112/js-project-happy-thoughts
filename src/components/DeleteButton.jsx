@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Modal, Box, Typography, Button } from "@mui/material"
+import { Modal, Box, Typography, Button, IconButton, Tooltip } from "@mui/material"
 import { useThoughtStore } from "../store/useThoughtStore"
 import { useAuthStore } from "../store/useAuthStore"
 
@@ -39,7 +39,11 @@ const DeleteThought = ({ id }) => {
 
   return (
     <>
-      <button onClick={handleOpen} aria-label="Delete this message">🗑️</button>
+      <Tooltip title="Delete">
+        <IconButton onClick={handleDelete} aria-label="Delete your message">
+          🗑️
+        </IconButton>
+      </Tooltip>
       <Modal open={open} onClose={handleClose} aria-labelledby="delete-modal-title">
         <Box sx={modalStyle}>
           <Typography variant="h6" mb={2}>Delete This Thought?</Typography>

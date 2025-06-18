@@ -4,6 +4,7 @@ export const useAuthStore = create((set) => ({
     username: "",
     email: "",
     userId: localStorage.getItem("userId") ?? null,
+    username: localStorage.getItem("username") ?? "",
     accessToken: localStorage.getItem("accessToken") ?? null,
 
   setUsername: (username) => set({ username }),
@@ -24,6 +25,7 @@ export const useAuthStore = create((set) => ({
       set({ accessToken: data.accessToken, username: data.username, userId: data.userId })
       localStorage.setItem("accessToken", data.accessToken)
       localStorage.setItem("userId", data.userId)
+      localStorage.setItem("username", data.username)
 
     } catch (err) {
       console.error("User not registered:", err)
@@ -46,6 +48,7 @@ export const useAuthStore = create((set) => ({
       set({ accessToken: data.accessToken, username: data.username, userId: data.userId })
       localStorage.setItem("accessToken", data.accessToken)
       localStorage.setItem("userId", data.userId)
+      localStorage.setItem("username", data.username)
 
     } catch (err) {
       console.error("User not logged in:", err)
@@ -57,6 +60,7 @@ export const useAuthStore = create((set) => ({
     set({ accessToken: null, username: "", password: "", email: "" })
     localStorage.removeItem("accessToken")
     localStorage.removeItem("userId")
+    localStorage.removeItem("username")
   }
 })
 )

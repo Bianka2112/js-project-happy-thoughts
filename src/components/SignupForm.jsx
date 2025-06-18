@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Modal, Box, Typography, TextField, Button, Snackbar, Alert} from "@mui/material"
-import { useAuthStore } from "../store/useAuthStore";
+import { useAuthStore } from "../store/useAuthStore"
+import WelcomeUser from "./WelcomeUser"
 
 const SignupForm = () => {
   const [open, setOpen] = useState(false)
@@ -41,25 +42,31 @@ const SignupForm = () => {
         Register To Share Yours Too! 
       </Button>
       ) : (
-      <Box>
-        {/* <Typography variant="body1">🎉 You're logged in!</Typography> */}
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={handleLogout}
-            sx={{
-              fontSize: "0.9rem",
-              fontWeight: "600",
-              borderRadius: "20px", 
-              borderColor: "#111",
-              textTransform: "none",
-              fontFamily: "'Quicksand', sans-serif",
-              color: "#111",
-              px: 3
-            }}>
-            Log out
-          </Button>
+        <Box display="flex" alignItems="center" justifyContent="center" gap={2} mt={2} mb={2}>
+        <WelcomeUser />
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={handleLogout}
+          sx={{
+            fontFamily: "'Quicksand', sans-serif",
+            fontWeight: 600,
+            fontSize: "0.85rem",
+            height: "32px",
+            borderRadius: "16px",
+            color: "#111",
+            px: 2,
+            textTransform: "none",
+            borderColor: "#111",
+            "&:hover": {
+              backgroundColor: "#eee",
+            },
+          }}
+        >
+          Log out
+        </Button>
       </Box>
+      
       )}
         <Snackbar
           open={snackbarOpen}
@@ -81,9 +88,6 @@ const SignupForm = () => {
     </>
   )
 }
-
-
-
 
 export default SignupForm
 
@@ -135,73 +139,70 @@ const modalStyle = {
   }
 
   return (
-    <>
-   
     <Modal open={open} onClose={onClose} >
-    <Box sx={modalStyle}>
-      <Typography variant="h6" mb={2}>Register</Typography>
-      <TextField
-        fullWidth
-        label="Username"
-        variant="outlined"
-        margin="dense"
-        placeholder="Your Name"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <TextField
-        fullWidth
-        label="Email"
-        variant="outlined"
-        margin="dense"
-        placeholder="name@example.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <TextField
-        fullWidth
-        label="Password"
-        type="password"
-        variant="outlined"
-        margin="dense"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        fullWidth
-        disabled={!username || !password}
-        onClick={handleSubmit}
-        sx={{
-          mt: 2,
-          py: 1.2,
-          fontSize: "1rem",
-          fontWeight: "700",
-          borderRadius: "20px",
-          backgroundColor: "#fabda5b3",
-          color: "#111",
-          "&:hover": {
-            backgroundColor: "#f95f86"
-          },
-          fontFamily: "'Quicksand', sans-serif",
-          textTransform: "none"
-        }}
-      >
-        Register me!
-      </Button>
-      {successMessage && (
-        <Typography variant="body2" color="primary" mt={1}>
-          {successMessage}
-        </Typography>
-      )}
-      {errorMessage && (
-        <Typography variant="body2" color="error" mt={1}>
-          {errorMessage}
-        </Typography>
-      )}
-    </Box>
+      <Box sx={modalStyle}>
+        <Typography variant="h6" mb={2}>Register</Typography>
+        <TextField
+          fullWidth
+          label="Username"
+          variant="outlined"
+          margin="dense"
+          placeholder="Your Name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Email"
+          variant="outlined"
+          margin="dense"
+          placeholder="name@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Password"
+          type="password"
+          variant="outlined"
+          margin="dense"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={!username || !password}
+          onClick={handleSubmit}
+          sx={{
+            mt: 2,
+            py: 1.2,
+            fontSize: "1rem",
+            fontWeight: "700",
+            borderRadius: "20px",
+            backgroundColor: "#fabda5b3",
+            color: "#111",
+            "&:hover": {
+              backgroundColor: "#f95f86"
+            },
+            fontFamily: "'Quicksand', sans-serif",
+            textTransform: "none"
+          }}
+        >
+          Register me!
+        </Button>
+        {successMessage && (
+          <Typography variant="body2" color="primary" mt={1}>
+            {successMessage}
+          </Typography>
+        )}
+        {errorMessage && (
+          <Typography variant="body2" color="error" mt={1}>
+            {errorMessage}
+          </Typography>
+        )}
+      </Box>
   </Modal>
-  </>
   )
 }

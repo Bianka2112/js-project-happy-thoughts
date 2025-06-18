@@ -7,7 +7,7 @@ const WelcomeUser = () => {
   if (!username) return null
 
   return (
-    <Box display="flex" justifyContent="center" mt={1} mb={2}>
+    <Box  justifyContent="center">
       <Chip
         label={`👋 Welcome, ${username}`}
         variant="outlined"
@@ -15,9 +15,11 @@ const WelcomeUser = () => {
           fontFamily: "'Quicksand', sans-serif",
           fontWeight: "600",
           fontSize: "0.95rem",
+          height: "32px",
           borderRadius: "16px",
           borderColor: "#111",
           background: "white",
+          px: 2
         }}
       />
     </Box>
