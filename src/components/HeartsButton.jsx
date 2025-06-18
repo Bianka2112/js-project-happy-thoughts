@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { API_URL } from "../utils/constants"
+import { THOUGHTS_URL } from "../utils/constants"
 
 import * as Styled from "./Styled-Comps"
 
@@ -17,7 +17,7 @@ const HeartsButton = ({ hearts, id }) => {
     }, 600)
     
     try {
-      const response = await fetch(`${API_URL}/${id}/like`, {
+      const response = await fetch(`${THOUGHTS_URL}/${id}/like`, {
         method: "POST",
       })
 

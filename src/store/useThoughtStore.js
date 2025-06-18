@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { API_URL } from "../utils/constants"
+import { THOUGHTS_URL } from "../utils/constants"
 import { useAuthStore } from "./useAuthStore";
 
 export const useThoughtStore = create((set) => ({
@@ -10,7 +10,7 @@ export const useThoughtStore = create((set) => ({
   fetchThoughts: async () => {
     set({ loading: true, error: null })
     try {
-      const response = await fetch(API_URL)
+      const response = await fetch(THOUGHTS_URL)
       const data = await response.json()
       set({ thoughts: data.response, loading: false })
     } catch (error) {
@@ -27,7 +27,7 @@ export const useThoughtStore = create((set) => ({
     const token = useAuthStore.getState().accessToken
 
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${THOUGHTS_URL}/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const useThoughtStore = create((set) => ({
     const token = useAuthStore.getState().accessToken
 
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${THOUGHTS_URL}/${id}`, {
         method: "PATCH",
         headers: { 
           "Content-type": "application/json",

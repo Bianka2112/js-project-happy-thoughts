@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useThoughtStore } from "../store/useThoughtStore"
 import { useAuthStore } from "../store/useAuthStore"
-import { API_URL } from "../utils/constants"
+import { THOUGHTS_URL } from "../utils/constants"
 
 import * as Styled from "../components/Styled-Comps"
 import SignupForm from "../components/SignupForm"
@@ -26,7 +26,7 @@ const Form = () => {
       }
       
       try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(THOUGHTS_URL, {
           method: "POST",
           body: JSON.stringify({ message: messageText }),
           headers: { 

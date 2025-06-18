@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { AUTH_URL } from "../utils/constants"
 
 export const useAuthStore = create((set) => ({
     username: "",
@@ -12,7 +13,7 @@ export const useAuthStore = create((set) => ({
 
   createUser: async ({ username, email, password }) => {
     try {
-      const response = await fetch("http://localhost:8000/auth/register", {
+      const response = await fetch(`${AUTH_URL}/register`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ username, email, password })
@@ -35,7 +36,7 @@ export const useAuthStore = create((set) => ({
 
   loginUser: async ({ username, password }) => {
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const response = await fetch(`${AUTH_URL}/login`, {
         method: "POST",
         headers: {"Content-type": "application/json"},
         body: JSON.stringify({ username, password })
