@@ -4,22 +4,23 @@
 ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Status](https://img.shields.io/badge/status-In_Progress-yellow)
 
-
 # 💬 Happy Thoughts
 
 A social message board app where users can share short positive thoughts, ❤️ like others', and edit/delete their own posts. Built with full CRUD functionality and user authentication.
 
 ---
-## 🔗 **Live demo link**:   
-https://happy-thoughts-blr.netlify.app/
 
+## 🔗 **Project Access**:
 
+🚀 [Live Demo](https://happy-thoughts-blr.netlify.app)
+📚 [View API Documentation](https://your-api.onrender.com/)
 
 ## 🛠 Technologies Used
 
 - Frontend: React, Vite, Zustand (state management), MUI (Material UI)
 - Backend: Node.js, Express, MongoDB, Mongoose
 - Auth: Access tokens with protected routes and user-based permissions
+
 ---
 
 ## 💡 Features
@@ -40,5 +41,5 @@ https://happy-thoughts-blr.netlify.app/
 - 🔐 Expiring access tokens or JWT
 
 ### 🤝 Contributing
-Got ideas or want to improve the app? Fork the repo, create a branch, and open a PR!
 
+Got ideas or want to improve the app? Fork the repo, create a branch, and open a PR!
