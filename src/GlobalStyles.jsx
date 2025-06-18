@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
       );
     background-size: cover;
     font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
     background-color: #fdfdfd;
     color: #111;
   }
