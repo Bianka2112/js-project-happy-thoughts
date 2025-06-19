@@ -6,7 +6,7 @@ import { GlobalStyle } from "./GlobalStyles"
 import { MsgBoard } from "./sections/MsgBoard"
 import { useThoughtStore } from "./store/useThoughtStore"
 
-const App = ({ toggleTheme }) => {
+const App = ({ toggleTheme, mode }) => {
 
   const fetchThoughts = useThoughtStore((state) => state.fetchThoughts)
   const loading = useThoughtStore((state) => state.loading)
@@ -18,7 +18,7 @@ const App = ({ toggleTheme }) => {
   return (
     <>
       <GlobalStyle />
-      <Header toggleTheme={toggleTheme} />
+      <Header toggleTheme={toggleTheme} mode={mode}/>
       <Form />
       {loading ? <Loader /> : <MsgBoard />}
     </>

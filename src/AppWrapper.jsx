@@ -23,6 +23,25 @@ const AppWrapper = () => {
       typography: {
         fontFamily: styledTheme.font,
       },
+      components: {
+        MuiButtonBase: {
+          defaultProps: {
+            disableRipple: true, 
+          },
+        },
+        MuiCssBaseline: {
+          styleOverrides: {
+            "*:focus": {
+              outline: "none",
+              boxShadow: "none",
+            },
+            "button:focus-visible": {
+              outline: "2px solid #f95f86",
+              outlineOffset: "2px",
+            },
+          },
+        },
+      },
     }), [styledTheme]
   )
 

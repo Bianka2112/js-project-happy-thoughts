@@ -1,5 +1,7 @@
-import { keyframes } from "styled-components"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
+import { IconButton, Tooltip } from "@mui/material"
+import Brightness4Icon from "@mui/icons-material/Brightness4"
+import Brightness7Icon from "@mui/icons-material/Brightness7"
 
 const scrollingTitle = keyframes`
   0% {
@@ -22,11 +24,23 @@ const Title = styled.h1`
   padding: 2rem 1rem;
   animation: ${scrollingTitle} 10s linear infinite;
 `
+const ToggleContainer = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+`
 
-const Header = () => {
+const Header = ({ toggleTheme, mode }) => {
   return (
-    <TitleContainer> 
-    <Title> 💬 Happy Thoughts 💬 </Title>
+    <TitleContainer>
+      <ToggleContainer>
+        <Tooltip title="Toggle Light/Dark Theme">
+          <IconButton onClick={toggleTheme} color="inherit">
+            {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+        </Tooltip>
+      </ToggleContainer>
+      <Title> 💬 Happy Thoughts 💬 </Title>
     </TitleContainer>
   )
 }
