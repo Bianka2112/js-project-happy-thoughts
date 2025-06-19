@@ -36,6 +36,10 @@ const SignupForm = () => {
         "&:hover": {
           backgroundColor: "#f95f86"
         },
+        "&:focus-visible": {
+          outline: "2px solid #f95f86",
+          outlineOffset: "2px",
+        },
         fontFamily: "'Quicksand', sans-serif",
         textTransform: "none"
       }}>
@@ -60,6 +64,10 @@ const SignupForm = () => {
             borderColor: "#111",
             "&:hover": {
               backgroundColor: "#eee",
+            },
+            "&:focus-visible": {
+              outline: "2px solid #f95f86",
+              outlineOffset: "2px",
             },
           }}
         >
@@ -109,18 +117,34 @@ const modalStyle = {
  export const SignupModal = ({ open, onClose, createUser }) => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
   const [password, setPassword] = useState("")
+  
+  const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
+  const [fieldErrors, setFieldErrors] = useState({
+    username: "",
+    email: "",
+    password: "",
+  })
 
   const handleSubmit = async () => {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setErrorMessage("Invalid email address")
-      return
-    }
+    setFieldErrors({ username: "", email: "", password: "" })
+    const errors = {}
 
+    if (!username.trim()) {
+      errors.username = "Username is required"
+    }
+  
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Use valid email example@me.com"
+    }
+  
     if (password.length < 4) {
-      setErrorMessage("Password must be at least 4 characters")
+      errors.password = "Password must be at least 4 characters"
+    }
+  
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
       return
     }
     
@@ -139,7 +163,18 @@ const modalStyle = {
   
     } catch (err) {
       setSuccessMessage("")
-      setErrorMessage(err.message || "Signup failed")
+      const msg = err.message || "Signup failed"
+
+      // Smart detection
+      if (msg.includes("username")) {
+        setFieldErrors((prev) => ({ ...prev, username: msg }))
+      } else if (msg.includes("email")) {
+        setFieldErrors((prev) => ({ ...prev, email: msg }))
+      } else if (msg.toLowerCase().includes("password")) {
+        setFieldErrors((prev) => ({ ...prev, password: msg }))
+      } else {
+        setFieldErrors((prev) => ({ ...prev, username: msg }))
+      }
     }
   }
 
@@ -154,7 +189,12 @@ const modalStyle = {
           margin="dense"
           placeholder="Your Name"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => {
+            setUsername(e.target.value)
+            setFieldErrors((prev) => ({ ...prev, username: "" }))
+          }}
+          error={!!fieldErrors.username}
+          helperText={fieldErrors.username}
         />
         <TextField
           fullWidth
@@ -163,7 +203,12 @@ const modalStyle = {
           margin="dense"
           placeholder="name@example.com"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value)
+            setFieldErrors((prev) => ({ ...prev, email: "" }))
+          }}          
+          error={!!fieldErrors.email}
+          helperText={fieldErrors.email}
         />
         <TextField
           fullWidth
@@ -172,7 +217,12 @@ const modalStyle = {
           variant="outlined"
           margin="dense"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value)
+            setFieldErrors((prev) => ({ ...prev, password: "" }))
+          }}
+          error={!!fieldErrors.password}
+          helperText={fieldErrors.password}
         />
         <Button
           variant="contained"
