@@ -35,9 +35,10 @@ const Header = ({ toggleTheme, mode }) => {
     <TitleContainer>
       <ToggleContainer>
         <Tooltip title="Toggle Light/Dark Theme">
-          <IconButton onClick={toggleTheme} color="inherit">
+          {/* <IconButton onClick={toggleTheme} color="inherit">
             {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
+          </IconButton> */} 
+          {/* hidden until refactor style-code */}
         </Tooltip>
       </ToggleContainer>
       <Title> 💬 Happy Thoughts 💬 </Title>
